@@ -104,7 +104,7 @@ while True:
         print("Nobody in the file matches that criteria. ")
     break
     '''
-
+'''
 
 def one_hop(flights, city1, city2):
     for i in flights:
@@ -118,18 +118,47 @@ flights = {'London': ['Paris', 'Dublin'], 'Paris': ['London', 'Dublin'], 'Dublin
     ['Berlin', 'Paris', 'London'], 'Berlin': ['Dublin', 'Stockholm'], 'Stockholm': ['Berlin']}
 city1 = ''
 city2 = ''
-while city1 != 'London' or city1 != 'Paris':  # Fix to make sure input valid city and don't input same for both
-    city1 = input("Input the city you are departing from (London, Paris, Dublin, Berlin, Stockholm). ")
-    city2 = input("Input the city you are flying to (London, Paris, Dublin, Berlin, Stockholm). ")
+while city1 not in ['London', 'Paris', 'Dublin', 'Berlin', 'Stockholm'] or city2 not in \
+        ['London', 'Paris', 'Dublin', 'Berlin', 'Stockholm'] or city1 == city2:
+    city1 = input('Input the city you are departing from (London, Paris, Dublin, Berlin, Stockholm). ').capitalize()
+    city2 = input('Input the city you are flying to (London, Paris, Dublin, Berlin, Stockholm). ').capitalize()
 if one_hop(flights, city1, city2):
     print("There is a one hop available for that route.")
 else:
     print("There is no one hop available for that route.")
 
 '''
-def guess_number():
-    my_points = 0
-    comp_points = 0
-    while my_points < 30 and comp_points < 30:
-    number = randint(1, 2)
-'''
+
+
+def comp_number(past_numbers):
+    if len(past_numbers) < 3:
+        return '2'
+    else:
+        if past_numbers == ['1', '2', '1'] or past_numbers == ['1', '1', '2'] or past_numbers == ['2', '1', '1'] or \
+                past_numbers == ['1', '1', '1']:
+            return '2'
+        elif past_numbers == ['1', '2', '2'] or past_numbers == ['2', '1', '2'] or past_numbers == ['2', '2', '1'] or \
+                past_numbers == ['2', '2', '2']:
+            return '1'
+
+
+points = {'Me': 0, 'Computer': 0}
+past_numbers = []
+while points['Me'] < 30 and points['Computer'] < 30:
+    my_number = input("What number are you thinking of? (1 or 2) \n")
+    while my_number not in ['1', '2']:
+        my_number = input("What number are you thinking of? (1 or 2) \n")
+    if my_number == comp_number(past_numbers):
+        points['Computer'] = points['Computer'] + 1
+        print("The computer guessed your number!")
+    else:
+        points['Me'] = points['Me'] + 1
+        print("The computer didn't guess your number!")
+    print("Your score:", points['Me'], "Computer score:", points['Computer'])
+    if len(past_numbers) == 3:
+        del past_numbers[0]
+    past_numbers.append(my_number)
+if points['Me'] == 30:
+    print("You win!")
+else:
+    print("The computer wins.")
