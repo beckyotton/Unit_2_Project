@@ -1,164 +1,37 @@
-from random import *
 '''
+The function below takes in a tuple, and returns the largest and smallest numbers in the tuple. If the tuple has more
+than one item, it checks each item in the tuple against each other, adding 1 to the variable bigger and 1 to the
+variable smaller every time it is ether bigger or smaller than another number in the tuple. If either of these variables
+equals the length of the tuple - 1, this indicates it is the biggest or smallest number and it is then added to another
+tuple and returned through this. If there is one item in the tuple, a tuple of this item twice will be returned. If
+there are no items, a statement claiming there are no items in the tuple will be returned.
+'''
+
 def extremeTuple(args):
-    if len(args) > 1:
+    if len(args) > 1:  # If length of tuple above 1
         biggest = 0
         smallest = 0
-        for x in range(len(args)):
+        for x in range(len(args)):  # Runs for each item in tuple
             bigger = 0
             smaller = 0
-            for y in range(0, len(args)):
-                if args[x] > args[y]:
+            for y in range(0, len(args)):  # Runs for the length of the tuple
+                if args[x] > args[y]:  # If tuple item is larger than another number in the tuple, increases bigger by 1
                     bigger = bigger + 1
-                if args[x] < args[y]:
+                if args[x] < args[y]:  # If tuple item is smaller than other number in the tuple, increases smaller by 1
                     smaller = smaller + 1
-            if bigger == len(args)-1:
-                biggest = args[x]
-            elif smaller == len(args)-1:
-                smallest = args[x]
+            if bigger == len(args)-1:  # If bigger = to length of tuple - 1, this number is larger than all others
+                biggest = args[x] # Biggest is set to according item in tuple
+            elif smaller == len(args)-1:  # If smaller = to length of tuple - 1, this number is smaller than all others
+                smallest = args[x]  # Smallest is set to according item in tuple
         tuple_1 = (biggest, smallest)
-        return tuple_1
+        return tuple_1  # Returns tuple consisting of smallest and biggest number
     elif len(args) == 1:
-        tuple_1 = (args[0], args[0])
+        tuple_1 = (args[0], args[0])  # If tuple length is 1, returns a tuple of this number in a tuple twice
         return tuple_1
     else:
-        return "That tuple is empty, so there is no maximum or minimum value."
+        return "That tuple is empty, so there is no maximum or minimum value."  # If tuple length = 0, prints statement
 
 
-args = (87, 90, 67)
-print(extremeTuple(args))
-'''
-'''
-directory = []
-students = []
-with open("studentInfoText.txt", "r") as file:
-    for i in file:
-        line = tuple(map(str, i.strip().split(",")))
-        directory.append(line)
-
-while True:
-    user_inputs = {}
-
-    while True:
-        f_name = input("First name: ").capitalize()
-        if f_name.isalpha() or len(f_name) == 0:
-            user_inputs['FirstName'] = f_name
-            break
-        else:
-            print("Input a valid first name.")
-
-    while True:
-        l_name = input("Last name: ").capitalize()
-        if l_name.isalpha() or len(l_name) == 0:
-            user_inputs['LastName'] = l_name
-            break
-        else:
-            print("Input a valid last name.")
-
-    while True:
-        grade = input("Grade: ")
-        if grade.isnumeric() or len(grade) == 0:
-            user_inputs['Grade'] = grade
-            break
-        else:
-            print("Input a valid grade.")
-
-    while True:
-        house = input("House: ").capitalize()
-        if house.isalpha() or len(house) == 0:
-            user_inputs['House'] = house
-            break
-        else:
-            print("Input a valid house.")
-
-    while True:
-        adviser = input("Adviser: ").capitalize()
-        if adviser.isalpha() or len(adviser) == 0:
-            user_inputs['Adviser'] = adviser
-            break
-        else:
-            print("Input a valid adviser.")
-
-    inputted = 0
-    for x in user_inputs.values():
-        if x != '':
-            inputted = inputted + 1
-
-    for i in range(0, len(user_inputs.values())):
-        for j in range(0, len(directory)):
-            matched = False
-            if directory[j][i] == list(user_inputs.values())[i]:
-                matched = True
-            if matched:
-                students.append(directory[j])
-    if inputted > 0:
-        holder = 0
-        print("People who fit your inputted criteria:")
-        for k in directory:
-            if students.count(k) == inputted:
-                holder = 1
-                print(k)
-        if holder == 0:
-            print("Nobody in the file matches that criteria. ")
-    else:
-        print("Nobody in the file matches that criteria. ")
-    break
-    '''
-'''
-
-def one_hop(flights, city1, city2):
-    for i in flights:
-        if i == city1:
-            for j in flights[i]:
-                if city2 in flights[j]:
-                    return True
-
-
-flights = {'London': ['Paris', 'Dublin'], 'Paris': ['London', 'Dublin'], 'Dublin':
-    ['Berlin', 'Paris', 'London'], 'Berlin': ['Dublin', 'Stockholm'], 'Stockholm': ['Berlin']}
-city1 = ''
-city2 = ''
-while city1 not in ['London', 'Paris', 'Dublin', 'Berlin', 'Stockholm'] or city2 not in \
-        ['London', 'Paris', 'Dublin', 'Berlin', 'Stockholm'] or city1 == city2:
-    city1 = input('Input the city you are departing from (London, Paris, Dublin, Berlin, Stockholm). ').capitalize()
-    city2 = input('Input the city you are flying to (London, Paris, Dublin, Berlin, Stockholm). ').capitalize()
-if one_hop(flights, city1, city2):
-    print("There is a one hop available for that route.")
-else:
-    print("There is no one hop available for that route.")
-
-'''
-
-
-def comp_number(past_numbers):
-    if len(past_numbers) < 3:
-        return '2'
-    else:
-        if past_numbers == ['1', '2', '1'] or past_numbers == ['1', '1', '2'] or past_numbers == ['2', '1', '1'] or \
-                past_numbers == ['1', '1', '1']:
-            return '2'
-        elif past_numbers == ['1', '2', '2'] or past_numbers == ['2', '1', '2'] or past_numbers == ['2', '2', '1'] or \
-                past_numbers == ['2', '2', '2']:
-            return '1'
-
-
-points = {'Me': 0, 'Computer': 0}
-past_numbers = []
-while points['Me'] < 30 and points['Computer'] < 30:
-    my_number = input("What number are you thinking of? (1 or 2) \n")
-    while my_number not in ['1', '2']:
-        my_number = input("What number are you thinking of? (1 or 2) \n")
-    if my_number == comp_number(past_numbers):
-        points['Computer'] = points['Computer'] + 1
-        print("The computer guessed your number!")
-    else:
-        points['Me'] = points['Me'] + 1
-        print("The computer didn't guess your number!")
-    print("Your score:", points['Me'], "Computer score:", points['Computer'])
-    if len(past_numbers) == 3:
-        del past_numbers[0]
-    past_numbers.append(my_number)
-if points['Me'] == 30:
-    print("You win!")
-else:
-    print("The computer wins.")
+args = (90, 89, 67, 200)
+print("Here is the biggest, then smallest number in that tuple:")
+print(extremeTuple(args))  # Runs function and prints what it returns
