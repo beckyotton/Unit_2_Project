@@ -63,8 +63,8 @@ while True:
         if x != '':  # Checks each user inputted value
             inputted = inputted + 1  # If they inputted anything other than a blank space, inputted is increased by 1
 
-'''The nested for loop below runs through all user inputs, and checks if each tuple contains each input. If the tuple does
-contain the input at the correct index, then the tuple is added to the list "students".'''
+    """The nested for loop below runs through all user inputs, and checks if each tuple contains each input. If the 
+    tuple does contain the input at the correct index, then the tuple is added to the list "students"."""
     for i in range(0, len(user_inputs.values())):  # Runs in the range of the amount of values inputted
         for j in range(0, len(directory)):  # Runs in the range of length of directory containing each line of file
             matched = False

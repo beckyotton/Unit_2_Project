@@ -13,7 +13,8 @@ def one_hop(flights, city1, city2):
 
 
 '''
-This code represents the body of the program
+This code represents the body of the program where the user inputs the original city and the destination city, it then
+runs the function and tells the user is a one-hop is available.
 '''
 
 flights = {'London': ['Paris', 'Dublin'], 'Paris': ['London', 'Dublin'], 'Dublin':
